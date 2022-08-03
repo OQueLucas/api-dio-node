@@ -1,0 +1,3 @@
+class GetAllUserController {}
+
+export { GetAllUserController };

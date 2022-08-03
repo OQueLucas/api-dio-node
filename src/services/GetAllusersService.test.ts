@@ -1,8 +1,7 @@
-import { AfterInsert, getConnection } from 'typeorm';
+import { getConnection } from 'typeorm';
 import createConnection from '../database';
 import { GetAllUserService } from './GetAllusersService';
-import { CreateUserService } from './CreateUserService';
-import { v4 as uuid } from 'uuid';
+import { FakeData } from '../utils/FakeData';
 
 describe('GetALlUserService', () => {
   beforeAll(async () => {
@@ -16,20 +15,10 @@ describe('GetALlUserService', () => {
     await connection.close();
   });
 
+  const fakeData = new FakeData();
+
   it('Deve retornar todos os usuarios cadastrados', async () => {
-    const createUserService = new CreateUserService();
-
-    await createUserService.execute({
-      id: uuid(),
-      nome: 'Algum usuario',
-      email: 'algumusuario@email.com',
-    });
-
-    await createUserService.execute({
-      id: uuid(),
-      nome: 'Outro usuario',
-      email: '',
-    });
+    await fakeData.execute();
 
     const expectedResponse = [
       {
