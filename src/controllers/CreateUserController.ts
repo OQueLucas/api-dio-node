@@ -17,7 +17,7 @@ class CreateUserController {
     }
     const user = await createUserService.execute({ id, nome, email });
 
-    return response.status(201).json({ user });
+    return response.status(201).json(user);
   }
 }
 
